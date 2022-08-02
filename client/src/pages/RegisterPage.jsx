@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const RegisterPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const status = useSelector((state) => state.auth.status);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status) {
+      toast(status);
+    }
+  }, [status]);
+
+  const handleSubmit = () => {
+    try {
+      dispatch(registerUser({ username, password }));
+      setPassword("");
+      setUsername("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <form
       onSubmit={(event) => event.preventDefault()}
@@ -13,6 +37,8 @@ export const RegisterPage = () => {
         Username:
         <input
           type="text"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           placeholder="Username"
           className="mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-gray-700"
         />
@@ -22,6 +48,8 @@ export const RegisterPage = () => {
         Password:
         <input
           type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
           placeholder="Password"
           className="mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-gray-700"
         />
@@ -31,6 +59,7 @@ export const RegisterPage = () => {
         <button
           type="submit"
           className="flex justify-center items-center text-xs bg-gray-600 text-white rounded-sm py-2 px-4"
+          onClick={handleSubmit}
         >
           Confirm
         </button>
