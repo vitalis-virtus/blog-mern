@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fileUpload = require("express-fileUpload");
 
 const { authRouter } = require("./api");
 const { postsRouter } = require("./api");
@@ -13,7 +14,9 @@ const { PORT = 3002, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 //middlewares
 app.use(cors());
+app.use(fileUpload());
 app.use(express.json());
+app.use(express.static("uploads"));
 
 //routes
 app.use("/api/auth", authRouter);

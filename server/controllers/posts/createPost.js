@@ -8,9 +8,9 @@ const createPost = async (req, res, next) => {
     const user = await authServices.getUserById(req.userId);
 
     // we have image in req.body
-    if (req.file) {
+    if (req.files) {
       let fileName = Date.now().toString() + req.files.image.name;
-      req.files.image.mv(path.join(__dirname, "..", "uploads", fileName));
+      req.files.image.mv(path.join(__dirname, "../..", "uploads", fileName));
 
       const newPostWithImage = await postServices.cretePost({
         username: user.username,
