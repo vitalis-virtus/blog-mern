@@ -1,5 +1,5 @@
-const jwtAuthenticate = require("./userAuth");
+const checkAuth = require("./checkAuth");
 
 module.exports = {
-  jwtAuthenticate,
+  checkAuth,
 };

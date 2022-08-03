@@ -1,15 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require('./configs/passport-config');
 
-
-
-const authRouter = require("./api/authRouter.js");
+const { authRouter } = require("./api");
+const { postsRouter } = require("./api");
 const app = express();
 
 require("dotenv").config();
-
 
 //constants
 const { PORT = 3002, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
@@ -20,6 +17,7 @@ app.use(express.json());
 
 //routes
 app.use("/api/auth", authRouter);
+app.use("/api/posts", postsRouter);
 
 async function start() {
   try {
