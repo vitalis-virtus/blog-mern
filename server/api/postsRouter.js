@@ -16,4 +16,10 @@ postsRouter.get("/:id", ctrl.getPostById);
 // get my posts
 postsRouter.get("/user/me", checkAuth, ctrl.getMyPosts);
 
+// delete post
+postsRouter.delete("/:id", checkAuth, ctrl.deletePost);
+
+// update post
+postsRouter.put("/:id", checkAuth, ctrl.updatePost);
+
 module.exports = postsRouter;

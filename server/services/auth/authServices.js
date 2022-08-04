@@ -12,11 +12,17 @@ const updateUserById = (id, updateInfo) => {
   return User.findByIdAndUpdate(id, updateInfo, { new: true });
 };
 
+const removePostById = (userId, postId) =>
+  User.findByIdAndUpdate(userId, {
+    $pull: { posts: postId },
+  });
+
 const getUserById = (id) => User.findById(id);
 
 module.exports = {
   findOneUser,
   addUser,
   updateUserById,
-  getUserById
+  getUserById,
+  removePostById,
 };

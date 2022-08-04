@@ -18,17 +18,17 @@ export const AddPostPage = () => {
       data.append("text", text);
       data.append("image", image);
       dispatch(createPost(data));
-      navigate('/')
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const clearFormHandler = () =>{
-    setText('');
-    setTitle('')
-    setImage('')
-}
+  const clearFormHandler = () => {
+    setText("");
+    setTitle("");
+    setImage("");
+  };
 
   return (
     <form
@@ -81,7 +81,10 @@ export const AddPostPage = () => {
         >
           Add post
         </button>
-        <button onClick={clearFormHandler} className="flex items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4">
+        <button
+          onClick={clearFormHandler}
+          className="flex items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4"
+        >
           Cancel
         </button>
       </div>

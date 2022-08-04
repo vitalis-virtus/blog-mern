@@ -13,10 +13,18 @@ const getPopular = () => {
   return Post.find().limit(5);
 };
 
-const getById = (id) => Post.findByIdAndUpdate(id, { $inc: { views: 1 } });
+const getByIdAndIncreaseViews = (id) =>
+  Post.findByIdAndUpdate(id, { $inc: { views: 1 } });
+
+const deleteById = (id) => Post.findByIdAndDelete(id);
+
+const getById = (id) => Post.findById(id);
+
 module.exports = {
   cretePost,
   getAll,
   getPopular,
+  getByIdAndIncreaseViews,
+  deleteById,
   getById,
 };
