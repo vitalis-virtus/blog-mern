@@ -22,4 +22,7 @@ postsRouter.delete("/:id", checkAuth, ctrl.deletePost);
 // update post
 postsRouter.put("/:id", checkAuth, ctrl.updatePost);
 
+// get post comments
+postsRouter.get("/comments/:id", ctrl.getPostComments);
+
 module.exports = postsRouter;

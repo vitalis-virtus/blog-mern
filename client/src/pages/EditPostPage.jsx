@@ -35,7 +35,7 @@ export const EditPostPage = () => {
       updatedPost.append("text", text);
       updatedPost.append("id", postId);
       updatedPost.append("image", newImage);
-      dispatch(updatePost({updatedPost, postId}));
+      dispatch(updatePost({ updatedPost, postId }));
       navigate("/posts");
       toast("You have successfully updated your post");
     } catch (error) {
@@ -104,7 +104,7 @@ export const EditPostPage = () => {
           onClick={submitHandler}
           className="flex items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
         >
-          Add post
+          Save
         </button>
         <button
           onClick={clearFormHandler}

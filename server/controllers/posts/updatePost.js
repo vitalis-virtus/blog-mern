@@ -1,15 +1,16 @@
-const { postServices } = require("../../services");
+const { postsServices } = require("../../services");
+const path = require("path");
 
 const updatePost = async (req, res) => {
   try {
     const { title, text, id } = req.body;
 
-    const post = await postServices.getById(id);
+    const post = await postsServices.getById(id);
 
     if (req.files) {
       let fileName = Date.now().toString() + req.files.image.name;
       req.files.image.mv(path.join(__dirname, "../..", "uploads", fileName));
-      post.imgUrl = filename || "";
+      post.imgUrl = fileName;
     }
 
     post.title = title;

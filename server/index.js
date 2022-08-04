@@ -5,6 +5,7 @@ const fileUpload = require("express-fileUpload");
 
 const { authRouter } = require("./api");
 const { postsRouter } = require("./api");
+const commentRouter = require("./api/commentsRouter");
 const app = express();
 
 require("dotenv").config();
@@ -21,6 +22,7 @@ app.use(express.static("uploads"));
 //routes
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/comments", commentRouter);
 
 async function start() {
   try {

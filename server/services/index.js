@@ -1,7 +1,9 @@
 const authServices = require("./auth/authServices");
-const postServices = require("./posts/postsServices");
+const postsServices = require("./posts/postsServices");
+const commentsServices = require("./comments/commentsServices");
 
 module.exports = {
   authServices,
-  postServices,
+  postsServices,
+  commentsServices,
 };

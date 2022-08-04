@@ -1,4 +1,4 @@
-const { postServices } = require("../../services");
+const { postsServices } = require("../../services");
 const { authServices } = require("../../services");
 const path = require("path");
 
@@ -6,7 +6,7 @@ const deletePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
     const userId = req.userId;
-    const post = await postServices.deleteById(postId);
+    const post = await postsServices.deleteById(postId);
 
     if (!post) {
       res.json({

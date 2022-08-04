@@ -1,10 +1,10 @@
-const { postServices } = require("../../services");
+const { postsServices } = require("../../services");
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await postServices.getAll().sort("-createdAt");
-
-    const popularPosts = await postServices.getPopular().sort("-views");
+    const posts = await postsServices.getAll().sort("-createdAt");
+    
+    const popularPosts = await postsServices.getPopular().sort("-views");
 
     if (!posts) {
       return res.json({ message: "No posts" });

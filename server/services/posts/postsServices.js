@@ -13,8 +13,13 @@ const getPopular = () => {
   return Post.find().limit(5);
 };
 
-const getByIdAndIncreaseViews = (id) =>
-  Post.findByIdAndUpdate(id, { $inc: { views: 1 } });
+const getByIdAndIncreaseViews = (id) => {
+  return Post.findByIdAndUpdate(id, { $inc: { views: 1 } });
+};
+
+const getByIdAndUpdate = (id, updateData) => {
+  return Post.findByIdAndUpdate(id, { $push: { comments: updateData } });
+};
 
 const deleteById = (id) => Post.findByIdAndDelete(id);
 
@@ -27,4 +32,5 @@ module.exports = {
   getByIdAndIncreaseViews,
   deleteById,
   getById,
+  getByIdAndUpdate,
 };

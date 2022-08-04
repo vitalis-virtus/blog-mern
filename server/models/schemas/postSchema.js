@@ -26,10 +26,10 @@ const postSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    comments: {
+    comments: [{
       type: Schema.Types.ObjectId,
-      ref: "Coment",
-    },
+      ref: "Comment",
+    }],
   },
   { versionKey: false, timestamps: true }
 );

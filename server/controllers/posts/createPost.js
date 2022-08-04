@@ -1,4 +1,4 @@
-const { postServices } = require("../../services");
+const { postsServices } = require("../../services");
 const { authServices } = require("../../services");
 const path = require("path");
 
@@ -12,7 +12,7 @@ const createPost = async (req, res, next) => {
       let fileName = Date.now().toString() + req.files.image.name;
       req.files.image.mv(path.join(__dirname, "../..", "uploads", fileName));
 
-      const newPostWithImage = await postServices.cretePost({
+      const newPostWithImage = await postsServices.cretePost({
         username: user.username,
         title,
         text,
@@ -28,7 +28,7 @@ const createPost = async (req, res, next) => {
     }
 
     // no image in req.body
-    const newPostWithoutImage = await postServices.cretePost({
+    const newPostWithoutImage = await postsServices.cretePost({
       username: user.username,
       title,
       text,

@@ -1,9 +1,9 @@
-const { postServices } = require("../../services");
+const { postsServices } = require("../../services");
 
 const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await postServices.getByIdAndIncreaseViews(id);
+    const post = await postsServices.getByIdAndIncreaseViews(id);
     res.json({ post });
   } catch (error) {
     res.json({

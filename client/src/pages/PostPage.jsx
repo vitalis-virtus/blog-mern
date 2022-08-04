@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
+import { CommentItem } from "../components/CommentItem";
 import {
   AiFillEye,
   AiOutlineMessage,
@@ -11,28 +12,59 @@ import axios from "../utils/axios";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../redux/features/post/postSlice";
 import { toast } from "react-toastify";
+import {
+  createComment,
+  getPostComments,
+} from "../redux/features/comment/commentSlice";
 
 export const PostPage = () => {
   const [post, setPost] = useState(null);
+  const [comment, setComment] = useState("");
+
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { user } = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.comment);
+  const { comments } = useSelector((state) => state.comment);
 
   const fetchPost = useCallback(async () => {
     const { data } = await axios.get(`/posts/${params.id}`);
     setPost(data.post);
-  }, [params]);
+  }, [params.id]);
+
+  const fetchPostComments = useCallback(async () => {
+    try {
+      dispatch(getPostComments(params.id));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, params.id]);
 
   useEffect(() => {
     fetchPost();
   }, [fetchPost]);
+
+  useEffect(() => {
+    fetchPostComments();
+  }, [fetchPostComments]);
 
   const removePostHandler = () => {
     try {
       dispatch(deletePost(params.id));
       toast("Post was successfully deleted");
       navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = () => {
+    try {
+      const postId = params.id;
+      dispatch(createComment({ postId, comment }));
+      setComment("");
     } catch (error) {
       console.log(error);
     }
@@ -111,7 +143,39 @@ export const PostPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/3">COMMENTS</div>
+        <div className="p-8 bg-gray-700 flex flex-col gap-2 rounded-sm w-1/3">
+          <form
+            className="flex gap-2"
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <input
+              type="text"
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              placeholder="comment"
+              className="text-black w-full rounded-sm bg-gray-400 border p-2 text-xs outline-none placeholder:text-gray-700"
+            />
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
+            >
+              Send
+            </button>
+          </form>
+
+          {!isLoading ? (
+            comments?.map((comment, index) => (
+              <CommentItem key={index} comment={comment} />
+            ))
+          ) : (
+            <p className="flex items-center justify-center text-gray-700 text-[20px]">
+              Loading
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
