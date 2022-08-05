@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { updatePost } from "../redux/features/post/postSlice";
 import axios from "../utils/axios";
 import { toast } from "react-toastify";
+import { ImCross } from "react-icons/im";
 
 export const EditPostPage = () => {
   const [title, setTitle] = useState("");
@@ -11,6 +12,8 @@ export const EditPostPage = () => {
   const [oldImage, setOldImage] = useState("");
   const [newImage, setNewImage] = useState("");
   const [postId, setPostId] = useState("");
+
+  const [crossBtnColor, setCrossBtnColor] = useState("#757E8D");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,13 +67,52 @@ export const EditPostPage = () => {
           }}
         />
       </label>
-      <div className="flex object-cover py-2">
+      <div className="flex object-cover py-2 relative">
         {oldImage && (
-          <img src={`http://localhost:3002/${oldImage}`} alt="uploaded file" />
+          <>
+            <button
+              type="button"
+              onClick={(event) => {
+                setNewImage("");
+                setOldImage("");
+              }}
+              className="absolute m-2 p-1 right-0 border-2 border-gray-500 rounded-full ease-in-out duration-300 hover:border-gray-200"
+              onMouseEnter={() => {
+                setCrossBtnColor("#E5E7EB");
+              }}
+              onMouseLeave={() => {
+                setCrossBtnColor("757E8D");
+              }}
+            >
+              <ImCross color="#757E8D" style={{ color: crossBtnColor }} />
+            </button>
+            <img
+              src={`http://localhost:3002/${oldImage}`}
+              alt="uploaded file"
+            />
+          </>
         )}
 
         {newImage && (
-          <img src={URL.createObjectURL(newImage)} alt="uploaded file" />
+          <>
+            <img src={URL.createObjectURL(newImage)} alt="uploaded file" />
+            <button
+              type="button"
+              onClick={(event) => {
+                setNewImage("");
+                setOldImage("");
+              }}
+              className="absolute m-2 p-1 right-0 border-2 border-gray-500 rounded-full ease-in-out duration-300 hover:border-gray-200"
+              onMouseEnter={() => {
+                setCrossBtnColor("#E5E7EB");
+              }}
+              onMouseLeave={() => {
+                setCrossBtnColor("757E8D");
+              }}
+            >
+              <ImCross color="#757E8D" style={{ color: crossBtnColor }} />
+            </button>
+          </>
         )}
       </div>
 
