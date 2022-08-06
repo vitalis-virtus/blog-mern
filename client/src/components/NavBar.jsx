@@ -2,18 +2,23 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { checkIsAuth, logout } from "../redux/features/auth/authSlice";
+import {
+  checkIsAuth,
+  getUserName,
+  logout,
+} from "../redux/features/auth/authSlice";
 
 export const NavBar = () => {
   const isAuth = useSelector(checkIsAuth);
+  const user = useSelector(getUserName);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logout());
-    window.localStorage.removeItem('token');
-    toast("You are logged out")
-    navigate('/')
+    window.localStorage.removeItem("token");
+    toast("You are logged out");
+    navigate("/");
   };
 
   const aciveStyles = {
@@ -64,12 +69,18 @@ export const NavBar = () => {
         </ul>
       )}
 
-      <div className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4 py-2">
-        {isAuth ? (
-          <button onClick={logoutHandler}>Logout</button>
-        ) : (
-          <Link to={"/login"}>Login</Link>
-        )}
+      <div className="flex items-center justify-center text-xs text-white ">
+        <div className="flex items-center justify-center">
+          {isAuth ? (
+            <>
+            <span>Welcome,&nbsp;</span>
+            <p className="underline mr-2">{user.username}!</p>
+              <button className="flex justify-center items-center bg-gray-600 text-xs  text-white rounded-sm px-4 py-2"    onClick={logoutHandler}>Logout</button>
+            </>
+          ) : (
+            <Link to={"/login"}>Login</Link>
+          )}
+        </div>
       </div>
     </div>
   );

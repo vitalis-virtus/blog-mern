@@ -119,7 +119,8 @@ export const authSlice = createSlice({
 });
 
 export const checkIsAuth = (state) => Boolean(state.auth.token);
+export const getUserName = (state) => state.auth.user;
 
-export const {logout} = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

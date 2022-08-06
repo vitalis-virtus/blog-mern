@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ImCross } from "react-icons/im";
 import { createPost } from "../redux/features/post/postSlice";
+import { DeleteImageButton } from "../components/DeleteImageButton";
 
 export const AddPostPage = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
-
-  const [crossBtnColor, setCrossBtnColor] = useState("#757E8D");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +23,10 @@ export const AddPostPage = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteImageButtonHandler = () => {
+    setImage("");
   };
 
   const clearFormHandler = () => {
@@ -51,22 +53,7 @@ export const AddPostPage = () => {
       <div className="flex object-cover py-2 relative">
         {image && (
           <>
-            <button
-              type="button"
-              onClick={(event) => {
-                setImage("");
-              }}
-              className="absolute m-2 p-1 right-0 border-2 border-gray-500 rounded-full ease-in-out duration-300 hover:border-gray-200"
-              onMouseEnter={() => {
-                setCrossBtnColor("#E5E7EB");
-              }}
-              onMouseLeave={() => {
-                setCrossBtnColor("757E8D");
-              }}
-            >
-              <ImCross color="#757E8D" style={{ color: crossBtnColor }} />
-            </button>
-
+            <DeleteImageButton clickHandler={deleteImageButtonHandler} />
             <img src={URL.createObjectURL(image)} alt="uploaded file" />
           </>
         )}
