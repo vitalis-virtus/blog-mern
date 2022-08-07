@@ -8,8 +8,9 @@ const getMyPosts = async (req, res) => {
     const list = await Promise.all(
       user.posts.map((post) => postsServices.getById(post._id))
     );
-
-    res.json({list});
+    list.reverse();
+    
+    res.json({ list });
   } catch (error) {
     res.json({
       message: "Something wrong",

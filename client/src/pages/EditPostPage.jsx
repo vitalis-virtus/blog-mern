@@ -111,7 +111,7 @@ export const EditPostPage = () => {
           onChange={(event) => {
             setText(event.target.value);
           }}
-          className="mt-1 text-black w-full rounded-lg bg-gray-400 border resize-none h-40 py-1 px-2 text-xs outline-none placeholder:text-grey-700"
+          className="mt-1 text-black w-full rounded-lg bg-gray-400 border resize-none h-40 py-1 px-2 text-xs outline-none placeholder:text-grey-700 whitespace-pre-line"
         />
       </label>
 

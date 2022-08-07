@@ -27,12 +27,12 @@ export const PostItem = ({ post }) => {
         <div className="flex justify-between items-center pt-2">
           <div className="text-sx text-white opacity-50">{post.username}</div>
           <div className="text-sx text-white opacity-50">
-            {<Moment date={post.createdAt} format="d MMM YYYY HH:MM" />}
+            {<Moment date={post.createdAt} format="DD MMM YYYY HH:MM" />}
           </div>
         </div>
 
         <div className="text-white text-xl">{post.title}</div>
-        <p className="text-white opacity-60 text-xs pt-4 line-clamp-4">{post.text}</p>
+        <p className="text-white opacity-60 text-xs pt-4 line-clamp-4 whitespace-pre-line" >{post.text}</p>
 
         <div className="flex gap-3 mt-2 items-center">
           <button className="flex items-center juctify-center gap-2 text-xs text-white opacity-50">

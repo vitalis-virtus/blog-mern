@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createPost } from "../redux/features/post/postSlice";
+import { createPost, getAllPosts } from "../redux/features/post/postSlice";
 import { DeleteImageButton } from "../components/DeleteImageButton";
 
 export const AddPostPage = () => {
@@ -19,6 +19,7 @@ export const AddPostPage = () => {
       data.append("text", text);
       data.append("image", image);
       dispatch(createPost(data));
+      dispatch(getAllPosts());
       navigate("/");
     } catch (error) {
       console.log(error);
