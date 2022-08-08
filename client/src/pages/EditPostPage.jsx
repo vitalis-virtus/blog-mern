@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useFetch } from "../hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePost } from "../redux/features/post/postSlice";
-import axios from "../utils/axios";
 import { toast } from "react-toastify";
 import { DeleteImageButton } from "../components/DeleteImageButton";
+
 
 export const EditPostPage = () => {
   const [title, setTitle] = useState("");
@@ -13,18 +14,18 @@ export const EditPostPage = () => {
   const [newImage, setNewImage] = useState("");
   const [postId, setPostId] = useState("");
 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+  const { getPost } = useFetch();
 
   const fetchPost = useCallback(async () => {
-    const { data } = await axios.get(`/posts/${params.id}`);
+    const { data } = await getPost(params.id);
     setTitle(data.post.title);
     setText(data.post.text);
     setOldImage(data.post.imgUrl);
     setPostId(data.post._id);
-  }, [params]);
+  }, [getPost, params.id]);
 
   useEffect(() => {
     fetchPost();

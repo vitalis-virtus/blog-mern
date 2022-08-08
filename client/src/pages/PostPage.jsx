@@ -8,8 +8,8 @@ import {
 } from "react-icons/ai";
 import Moment from "react-moment";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "../utils/axios";
 import { useSelector, useDispatch } from "react-redux";
+import { useFetch } from "../hooks/useFetch";
 import { deletePost, getAllPosts } from "../redux/features/post/postSlice";
 import { toast } from "react-toastify";
 import {
@@ -25,6 +25,7 @@ export const PostPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { getPost } = useFetch();
 
   const { user } = useSelector((state) => state.auth);
   const { isLoading } = useSelector((state) => state.comment);
@@ -32,9 +33,10 @@ export const PostPage = () => {
   const isAuth = useSelector(checkIsAuth);
 
   const fetchPost = useCallback(async () => {
-    const { data } = await axios.get(`/posts/${params.id}`);
+    const { data } = await getPost(params.id);
+    console.log(data);
     setPost(data.post);
-  }, [params.id]);
+  }, [getPost, params.id]);
 
   const fetchPostComments = useCallback(async () => {
     try {
@@ -56,7 +58,7 @@ export const PostPage = () => {
     try {
       dispatch(deletePost(params.id));
       toast("Post was successfully deleted");
-      dispatch(getAllPosts())
+      dispatch(getAllPosts());
       navigate("/");
     } catch (error) {
       console.log(error);

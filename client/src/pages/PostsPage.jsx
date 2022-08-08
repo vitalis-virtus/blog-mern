@@ -1,20 +1,21 @@
-import axios from "../utils/axios";
 import React, { useState, useCallback, useEffect } from "react";
 import { PostItem } from "../components/PostItem";
 import { Link } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
 
 export const PostsPage = () => {
   const [posts, setPosts] = useState([]);
 
+  const { getMyPosts } = useFetch();
+
   const fetchMyPosts = useCallback(async () => {
     try {
-      const { data } = await axios.get("/posts/user/me");
-
+      const { data } = await getMyPosts();
       setPosts(data.list);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [getMyPosts]);
 
   useEffect(() => {
     fetchMyPosts();
