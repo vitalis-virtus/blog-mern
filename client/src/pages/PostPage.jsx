@@ -34,9 +34,8 @@ export const PostPage = () => {
 
   const fetchPost = useCallback(async () => {
     const { data } = await getPost(params.id);
-    console.log(data);
     setPost(data.post);
-  }, [getPost, params.id]);
+  }, []);
 
   const fetchPostComments = useCallback(async () => {
     try {
@@ -135,7 +134,7 @@ export const PostPage = () => {
               {user?._id === post.author && (
                 <div className="flex gap-3 mt-4">
                   <button className="flex items-center juctify-center gap-2  text-white opacity-50">
-                    <Link to={`/${params.id}/edit`}>
+                    <Link to={`/post/${params.id}/edit`}>
                       <AiTwotoneEdit />
                     </Link>
                   </button>
@@ -150,7 +149,7 @@ export const PostPage = () => {
             </div>
           </div>
         </div>
-        {Boolean(comments.length) && (
+        {
           <div className="p-8 bg-gray-700 flex flex-col gap-2 rounded-sm w-1/3">
             {isAuth && (
               <form
@@ -175,7 +174,7 @@ export const PostPage = () => {
                 </button>
               </form>
             )}
-
+            {comments.length === 0 && <p className="text-center">No comments!</p>}
             {!isLoading ? (
               comments?.map((comment, index) => (
                 <CommentItem key={index} comment={comment} />
@@ -186,7 +185,7 @@ export const PostPage = () => {
               </p>
             )}
           </div>
-        )}
+        }
       </div>
     </div>
   );

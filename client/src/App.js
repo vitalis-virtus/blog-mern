@@ -13,24 +13,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { getMe } from "./redux/features/auth/authSlice";
 import { useEffect } from "react";
+import { getAllPosts } from "./redux/features/post/postSlice";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMe());
+    dispatch(getAllPosts());
   }, [dispatch]);
 
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="posts" element={<PostsPage />} />
-        <Route path=":id" element={<PostPage />} />
-        <Route path=":id/edit" element={<EditPostPage />} />
-        <Route path="new" element={<AddPostPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route path="/posts" element={<PostsPage />} />
+        <Route path="/post/:id" element={<PostPage />} />
+        <Route path="/post/:id/edit" element={<EditPostPage />} />
+        <Route path="/new" element={<AddPostPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
 
       <ToastContainer position="bottom-right" />

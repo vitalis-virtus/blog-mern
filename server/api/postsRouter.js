@@ -10,27 +10,22 @@ postsRouter.post("/", checkAuth, ctrl.createPost);
 
 // get all posts
 // http://localhost:3002/api/posts/
-
-postsRouter.get("/", ctrl.getAllPosts);
+postsRouter.get("/:page", ctrl.getAllPosts);
 
 // get post by id
-// http://localhost:3002/api/posts/:id
-
-postsRouter.get("/:id", ctrl.getPostById);
+// http://localhost:3002/api/posts/post/:id
+postsRouter.get("/post/:id", ctrl.getPostById);
 
 // get my posts
 // http://localhost:3002/api/posts/user/me
-
 postsRouter.get("/user/me", checkAuth, ctrl.getMyPosts);
 
 // delete post
 // http://localhost:3002/api/posts/:id
-
 postsRouter.delete("/:id", checkAuth, ctrl.deletePost);
 
 // update post
 // http://localhost:3002/api/posts/id
-
 postsRouter.put("/:id", checkAuth, ctrl.updatePost);
 
 // get post comments

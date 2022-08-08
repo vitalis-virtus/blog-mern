@@ -5,9 +5,13 @@ const cretePost = ({ username, title, text, imgUrl, author }) => {
   return newPostWithImage.save();
 };
 
-const getAll = () => {
-  return Post.find();
+const getAll = (page, limit) => {
+  return Post.find()
+    .limit(limit * 1)
+    .skip((page - 1) * limit)
 };
+
+const getTotalCountOfPosts = () => Post.countDocuments();
 
 const getPopular = () => {
   return Post.find().limit(5);
@@ -33,4 +37,5 @@ module.exports = {
   deleteById,
   getById,
   getByIdAndUpdate,
+  getTotalCountOfPosts,
 };

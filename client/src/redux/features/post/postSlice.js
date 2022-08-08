@@ -3,6 +3,7 @@ import axios from "../../../utils/axios";
 
 const initialState = {
   posts: [],
+  postsPages: "",
   popularPosts: [],
   isLoading: false,
 };
@@ -19,14 +20,18 @@ export const createPost = createAsyncThunk(
   }
 );
 
-export const getAllPosts = createAsyncThunk("post/getPosts", async () => {
-  try {
-    const { data } = await axios.get("/posts");
-    return data;
-  } catch (error) {
-    console.log(error);
+export const getAllPosts = createAsyncThunk(
+  "post/getPosts",
+  async (page = 1) => {
+    console.log("page in Slice: ", page);
+    try {
+      const { data } = await axios.get(`/posts/${page}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export const deletePost = createAsyncThunk("post/deletePost", async (id) => {
   try {
@@ -63,7 +68,9 @@ export const postSlice = createSlice({
     },
     [createPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts.shift(action.payload);
+      console.log(action.payload);
+      state.posts.unshift(action.payload);
+      console.log(state);
     },
     [createPost.rejected]: (state) => {
       state.isLoading = false;
@@ -75,7 +82,8 @@ export const postSlice = createSlice({
     },
     [getAllPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload.posts;
+      state.posts.push(...action.payload.posts);
+      state.postsPages = action.payload.totalPages;
       state.popularPosts = action.payload.popularPosts;
     },
     [getAllPosts.rejected]: (state) => {
