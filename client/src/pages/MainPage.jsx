@@ -35,21 +35,23 @@ export const MainPage = () => {
               setCurrentPage((prev) => prev + 1);
             }}
             hasMore={posts.length < postsPages}
-            loader={<h4>Loading...</h4>}
+            loader={
+              <h4 className="text-center text-white opacity-50">Loading...</h4>
+            }
             endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
+              <p className="text-center text-white mt-4 opacity-50">
+                No more posts...
               </p>
             }
             refreshFunction={() => {}}
             pullDownToRefresh
             pullDownToRefreshContent={
-              <h3 style={{ textAlign: "center" }}>
+              <h3 className="text-center text-white opacity-50">
                 &#8595; Pull down to refresh
               </h3>
             }
             releaseToRefreshContent={
-              <h3 style={{ textAlign: "center" }}>
+              <h3 className="text-center text-white opacity-50">
                 &#8593; Release to refresh
               </h3>
             }

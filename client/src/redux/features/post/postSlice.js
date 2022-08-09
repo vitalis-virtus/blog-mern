@@ -23,7 +23,6 @@ export const createPost = createAsyncThunk(
 export const getAllPosts = createAsyncThunk(
   "post/getPosts",
   async (page = 1) => {
-    console.log("page in Slice: ", page);
     try {
       const { data } = await axios.get(`/posts/${page}`);
       return data;

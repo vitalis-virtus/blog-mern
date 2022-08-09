@@ -8,9 +8,9 @@ const postsRouter = express.Router();
 // http://localhost:3002/api/posts/
 postsRouter.post("/", checkAuth, ctrl.createPost);
 
-// get all posts
+// get posts
 // http://localhost:3002/api/posts/
-postsRouter.get("/:page", ctrl.getAllPosts);
+postsRouter.get("/:page", ctrl.getPosts);
 
 // get post by id
 // http://localhost:3002/api/posts/post/:id
@@ -18,7 +18,7 @@ postsRouter.get("/post/:id", ctrl.getPostById);
 
 // get my posts
 // http://localhost:3002/api/posts/user/me
-postsRouter.get("/user/me", checkAuth, ctrl.getMyPosts);
+postsRouter.get("/user/me/:page", checkAuth, ctrl.getMyPosts);
 
 // delete post
 // http://localhost:3002/api/posts/:id

@@ -1,11 +1,11 @@
 const { postsServices } = require("../../services");
 
-const getAllPosts = async (req, res) => {
-  const { page } = req.params;
+const getPosts = async (req, res) => {
   const limit = 5;
-
+  
   try {
-    const posts = await postsServices.getAll(page, limit).sort("-createdAt");
+    const { page } = req.params;
+    const posts = await postsServices.getPosts(page, limit).sort("-createdAt");
 
     const postsCount = await postsServices.getTotalCountOfPosts();
 
@@ -25,4 +25,4 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-module.exports = getAllPosts;
+module.exports = getPosts;

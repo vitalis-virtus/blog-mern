@@ -11,7 +11,7 @@ export const PostItem = ({ post }) => {
   }
   return (
     <Link to={`/post/${post._id}`}>
-      <div className="flex flex-col basis-1/4 flex-grow">
+      <div className="flex flex-col basis-1/4 py-6 border-b border-white border-opacity-20 flex-grow">
         <div
           className={post.imgUrl ? "flex rounded-sm h-80" : "flex rounded-sm"}
         >

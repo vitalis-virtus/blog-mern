@@ -1,5 +1,5 @@
 const createPost = require("./createPost");
-const getAllPosts = require("./getAllPosts");
+const getPosts = require("./getPosts");
 const getPostById = require("./getPostById");
 const getMyPosts = require("./getMyPosts");
 const deletePost = require("./deletePost");
@@ -8,7 +8,7 @@ const getPostComments = require('./getPostComments');
 
 module.exports = {
   createPost,
-  getAllPosts,
+  getPosts,
   getPostById,
   getMyPosts,
   deletePost,

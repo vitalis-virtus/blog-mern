@@ -40,7 +40,7 @@ export const NavBar = () => {
             <NavLink
               to={"/"}
               href="/"
-              className="text-xs text-gray-400 hover:text-white"
+              className="text-xs text-gray-400 hover:text-white ease-out duration-300"
               style={({ isActive }) => (isActive ? aciveStyles : undefined)}
             >
               Main
@@ -50,7 +50,7 @@ export const NavBar = () => {
             <NavLink
               to={"/posts"}
               href="/"
-              className="text-xs text-gray-400 hover:text-white"
+              className="text-xs text-gray-400 hover:text-white ease-out duration-300"
               style={({ isActive }) => (isActive ? aciveStyles : undefined)}
             >
               My posts
@@ -60,7 +60,7 @@ export const NavBar = () => {
             <NavLink
               to={"/new"}
               href="/"
-              className="text-xs text-gray-400 hover:text-white"
+              className="text-xs text-gray-400 hover:text-white ease-out duration-300"
               style={({ isActive }) => (isActive ? aciveStyles : undefined)}
             >
               Add post
@@ -73,12 +73,22 @@ export const NavBar = () => {
         <div className="flex items-center justify-center">
           {isAuth ? (
             <>
-            <span>Welcome,&nbsp;</span>
-            <p className="underline mr-2">{user.username}!</p>
-              <button className="flex justify-center items-center bg-gray-600 text-xs  text-white rounded-sm px-4 py-2"    onClick={logoutHandler}>Logout</button>
+              <span>Welcome,&nbsp;</span>
+              <p className="underline mr-2">{user.username}!</p>
+              <button
+                className="flex justify-center items-center bg-gray-600 text-xs  text-white rounded-sm px-4 py-2 hover:bg-gray-800 ease-out duration-300"
+                onClick={logoutHandler}
+              >
+                Logout
+              </button>
             </>
           ) : (
-            <Link to={"/login"}>Login</Link>
+            <Link
+              className="flex justify-center items-center bg-gray-600 text-xs  text-white rounded-sm px-4 py-2 hover:bg-gray-800 ease-out duration-300"
+              to={"/login"}
+            >
+              Login
+            </Link>
           )}
         </div>
       </div>
