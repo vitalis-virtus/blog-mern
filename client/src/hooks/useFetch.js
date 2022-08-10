@@ -4,7 +4,6 @@ import axios from "../utils/axios";
 export const useFetch = () => {
   const getPost = useCallback(async (id) => {
     try {
-      console.log("start in hook");
       const response = await axios.get(`/posts/post/${id}`);
       return response;
     } catch (error) {

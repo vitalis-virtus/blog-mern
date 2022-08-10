@@ -11,7 +11,7 @@ export const PostItem = ({ post }) => {
   }
   return (
     <Link to={`/post/${post._id}`}>
-      <div className="flex flex-col basis-1/4 py-6 border-b border-white border-opacity-20 flex-grow">
+      <div className="flex flex-col basis-1/4 py-6 border-b border-white border-opacity-20 flex-grow animate-[moveFromLeft_0.3s_ease-in-out]">
         <div
           className={post.imgUrl ? "flex rounded-sm h-80" : "flex rounded-sm"}
         >
@@ -19,7 +19,7 @@ export const PostItem = ({ post }) => {
             <img
               src={`http://localhost:3002/${post.imgUrl}`}
               alt="post_picture"
-              className="object-cover w-full"
+              className="object-cover w-full rounded-lg drop-shadow-lg"
             />
           )}
         </div>

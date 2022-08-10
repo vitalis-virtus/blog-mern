@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createPost, getAllPosts } from "../redux/features/post/postSlice";
+import { createPost } from "../redux/features/post/postSlice";
 import { DeleteImageButton } from "../components/DeleteImageButton";
 
 export const AddPostPage = () => {
@@ -37,10 +37,10 @@ export const AddPostPage = () => {
 
   return (
     <form
-      className="w-1/3 mx-auto py-10"
+      className="w-1/3 mx-auto py-10 animate-[movefromBottom_0.3s_ease-in-out] drop-shadow-2xl"
       onSubmit={(event) => event.preventDefault()}
     >
-      <label className="text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer">
+      <label className="text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer hover:bg-gray-500  ease-out duration-300">
         Use image
         <input
           type="file"
@@ -67,8 +67,8 @@ export const AddPostPage = () => {
           onChange={(event) => {
             setTitle(event.target.value);
           }}
-          placeholder="header"
-          className="mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-grey-700"
+          placeholder="Header"
+          className="mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-gray-700  hover:bg-gray-300 ease-out duration-300 focus:bg-gray-300"
         />
       </label>
 
@@ -80,7 +80,7 @@ export const AddPostPage = () => {
           onChange={(event) => {
             setText(event.target.value);
           }}
-          className="mt-1 text-black w-full rounded-lg bg-gray-400 border resize-none h-40 py-1 px-2 text-xs outline-none placeholder:text-grey-700"
+          className="mt-1 text-black w-full rounded-lg bg-gray-400 border resize-none h-40 py-1 px-2 text-xs outline-none placeholder:text-gray-700 whitespace-pre-line hover:bg-gray-300 ease-out duration-300 focus:bg-gray-300"
         />
       </label>
 
@@ -88,13 +88,14 @@ export const AddPostPage = () => {
         <button
           type="button"
           onClick={submitHandler}
-          className="flex items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
+          className="flex items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4
+          hover:bg-gray-700 ease-out duration-300"
         >
           Add post
         </button>
         <button
           onClick={clearFormHandler}
-          className="flex items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4"
+          className="flex items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4 hover:bg-red-600 easy-out duration-300"
         >
           Cancel
         </button>

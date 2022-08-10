@@ -4,6 +4,8 @@ import { PostItem } from "../components/PostItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../redux/features/post/postSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ScrollToTop from "react-scroll-to-top";
+import { LoaderSpinner } from "../components/LoaderSpinner";
 
 export const MainPage = () => {
   const [currentPage, setCurrentPage] = useState(2);
@@ -14,13 +16,11 @@ export const MainPage = () => {
     (state) => state.post
   );
 
-  // useLayoutEffect(() => {
-  //   dispatch(getAllPosts());
-  // }, []);
-
   if (!posts.length) {
     return (
-      <div className="text-xl text-center text-white py-10">No posts!</div>
+      <div className="grid mt-48 place-items-center">
+        <LoaderSpinner />
+      </div>
     );
   }
 
@@ -43,7 +43,10 @@ export const MainPage = () => {
                 No more posts...
               </p>
             }
-            refreshFunction={() => {}}
+            refreshFunction={() => {
+              dispatch(getAllPosts(1));
+              setCurrentPage(2);
+            }}
             pullDownToRefresh
             pullDownToRefreshContent={
               <h3 className="text-center text-white opacity-50">
@@ -61,14 +64,16 @@ export const MainPage = () => {
             ))}
           </InfiniteScroll>
         </div>
-        <div className="basis-1/5">
-          <div className="text-xs uppercase text-white">popular:</div>
+        <div className="basis-1/5 drop-shadow-lg">
+          <p className="text-xs uppercase text-white">popular:</p>
 
           {popularPosts?.map((post, index) => (
             <PopularPosts key={index} post={post} />
           ))}
         </div>
       </div>
+
+      <ScrollToTop className="flex items-center justify-center" smooth />
     </div>
   );
 };
